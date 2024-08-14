@@ -25,7 +25,7 @@ func TestChain(t *testing.T) {
 		Transport: Chain(
 			nil,
 			SetHeader("User-Agent", "transport-chain/v1.0.0"),
-			LogRequests,
+			LogRequests(&DefaultLogger{PrintResponsePayload: true}),
 		),
 	}
 
@@ -64,7 +64,7 @@ func TestChainWithRetries(t *testing.T) {
 		Transport: Chain(
 			http.DefaultTransport,
 			Retry(http.DefaultTransport, 5),
-			LogRequests,
+			LogRequests(&DefaultLogger{PrintResponsePayload: true}),
 		),
 	}
 
@@ -104,7 +104,7 @@ func TestChainWithRetryAfter(t *testing.T) {
 		Transport: Chain(
 			http.DefaultTransport,
 			Retry(http.DefaultTransport, 5),
-			LogRequests,
+			LogRequests(&DefaultLogger{PrintResponsePayload: true}),
 		),
 	}
 
